@@ -1,0 +1,73 @@
+//
+//  Images.js:
+//  BoilerPlate
+//
+//  Created by Retrocube on 10/4/2019, 9:46:34 AM.
+//  Copyright © 2019 Retrocube. All rights reserved.
+//
+export default {
+  // =============================================================================
+  // NAVIGATION
+  // =============================================================================
+  icBack: require('../assets/images/navigation/icBack.png'),
+  icMenu: require('../assets/images/navigation/icMenu.png'),
+  icNotification: require('../assets/images/icNotifications.png'),
+  icDashboard: require('../assets/images/navigation/dashboard.png'),
+  icProfile: require('../assets/images/navigation/profile.png'),
+  icCalendar: require('../assets/images/navigation/calendar.png'),
+  icMileStone: require('../assets/images/navigation/milestones.png'),
+  icUser: require('../assets/images/user/user1.png'),
+  icCreate: require('../assets/images/create.png'),
+  icTotalMilestones: require('../assets/images/totMilestone.png'),
+  icRemainingStones: require('../assets/images/totStones.png'),
+  icTotalTarget: require('../assets/images/totTarget.png'),
+  icAddMileStoneCover: require('../assets/images/addMilestone.png'),
+  icArrowLeft: require('../assets/images/arrowLeft.png'),
+  icArrowRight: require('../assets/images/arrowRight.png'),
+  moreMenu: require('../assets/images/moreMenu.png'),
+  icBell: require('../assets/images/bellIcon.png'),
+  icEmail: require('../assets/images/emailIcon.png'),
+  icUserIcon: require('../assets/images/userIcon.png'),
+  isLayer: require('../assets/images/layer.png'),
+  isLocker: require('../assets/images/group28.png'),
+  isSignIn: require('../assets/images/maskGroup5.png'),
+  isSignUp: require('../assets/images/maskGroup6.png'),
+  isUndrawForgotPassword: require('../assets/images/forgot-password.png'),
+  isForgotPassword: require('../assets/images/group5770.png'),
+  isQuotes1: require('../assets/images/rectangle1907.png'),
+  isQuotes2: require('../assets/images/rectangle1909.png'),
+  icPinIcon: require('../assets/images/pinIcon.png'),
+  icClose: require('../assets/images/icClose.png'),
+  icExpandMore: require('../assets/images/icExpandMore.png'),
+  icChecked: require('../assets/images/check.png'),
+  icChecked2: require('../assets/images/check2.png'),
+  icAdd: require('../assets/images/icAdd.png'),
+  icAgreement: require('../assets/images/agreement.png'),
+  icBoldOutline: require('../assets/images/boldOutline.png'),
+  icLargePlus: require('../assets/images/largePlus.png'),
+  icEdit: require('../assets/images/edit.png'),
+  icDelete: require('../assets/images/delete.png'),
+  icBook: require('../assets/images/book.png'),
+  deleteMilestone: require('../assets/images/deleteMilestone.png'),
+  icExport: require('../assets/images/export.png'),
+  icBadge1: require('../assets/images/badge1.png'),
+  icBadge2: require('../assets/images/badge2.png'),
+  icBadge3: require('../assets/images/badge3.png'),
+  icBadge4: require('../assets/images/badge4.png'),
+  icBadge5: require('../assets/images/badge5.png'),
+  icBadge2Large: require('../assets/images/badge2Large.png'),
+  icProgressComplete: require('../assets/images/progressComplete.png'),
+  icEye: require('../assets/images/eye.png'),
+  icEyeClose: require('../assets/images/eyeClose.png'),
+  icEmailContact: require('../assets/images/email.png'),
+  icPhoneCell: require('../assets/images/phoneCall.png'),
+  icPlaceholder: require('../assets/images/placeholder.png'),
+  profileLarge: require('../assets/images/profileLarge.png'),
+  icCamera: require('../assets/images/camera.png'),
+  icProfessional: require('../assets/images/professional.png'),
+  icFun: require('../assets/images/fun.png'),
+  icImage: require('../assets/images/image.png'),
+  icWImage: require('../assets/images/wImage.png'),
+  icEmailSend: require('../assets/images/EmailSend.png'),
+  icProfileSignUp: require('../assets/images/profileSignup.png')
+};
