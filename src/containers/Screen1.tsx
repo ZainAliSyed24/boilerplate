@@ -1,13 +1,29 @@
 import React, {ReactElement} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Button} from 'react-native';
+
+// import {showMessage, hideMessage} from 'react-native-flash-message';
 
 interface ScreenProps {}
 
 const Screen1: React.FC<ScreenProps> = props => {
   return (
+    // <View>
+    //   <Button
+    //     onPress={() => {
+    //       /* HERE WE GONE SHOW OUR FIRST MESSAGE */
+    //       showMessage({
+    //         message: 'Simple message',
+    //         type: 'info',
+    //       });
+    //     }}
+    //     title="Request Details"
+    //     color="#841584"
+    //   />
+
     <View style={styles.Container}>
       <Text style={styles.StyledText}>Screen 1</Text>
     </View>
+    // </View>
   );
 };
 
@@ -25,5 +41,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'blue',
     marginBottom: 8,
+  },
+  content: {
+    height: 50,
+    width: '100%',
   },
 });
