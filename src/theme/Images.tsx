@@ -14,6 +14,7 @@ export default {
   icUser: require('../assets/images/user/user1.png'),
   icArrowLeft: require('../assets/images/arrowLeft.png'),
   icArrowRight: require('../assets/images/arrowRight.png'),
+  icCalendar: require('../assets/images/navigation/calendar.png'),
   icUserIcon: require('../assets/images/userIcon.png'),
   icAdd: require('../assets/images/icAdd.png'),
   icEdit: require('../assets/images/edit.png'),

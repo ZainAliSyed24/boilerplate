@@ -1,29 +1,20 @@
-import React, {ReactElement} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
-
-// import {showMessage, hideMessage} from 'react-native-flash-message';
-
+import {MaterialTextField} from '../reuseableComponents';
 interface ScreenProps {}
 
 const Screen1: React.FC<ScreenProps> = props => {
-  return (
-    // <View>
-    //   <Button
-    //     onPress={() => {
-    //       /* HERE WE GONE SHOW OUR FIRST MESSAGE */
-    //       showMessage({
-    //         message: 'Simple message',
-    //         type: 'info',
-    //       });
-    //     }}
-    //     title="Request Details"
-    //     color="#841584"
-    //   />
+  useEffect(() => {}, []);
 
-    <View style={styles.Container}>
-      <Text style={styles.StyledText}>Screen 1</Text>
-    </View>
-    // </View>
+  return (
+    <>
+      <View style={styles.Container}>
+        {/* <MaterialTextField label="name"  /> */}
+        <View>
+          <Text style={styles.StyledText}>Screen 1</Text>
+        </View>
+      </View>
+    </>
   );
 };
 

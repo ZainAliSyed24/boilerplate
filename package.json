@@ -10,20 +10,25 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^3.5.2",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/drawer": "^5.0.6",
     "@react-navigation/native": "^5.0.6",
     "@react-navigation/native-stack": "^5.0.5",
     "@react-navigation/stack": "^5.0.6",
+    "@types/react-native-actionsheet": "^2.4.3",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "react": "17.0.1",
     "react-native": "0.64.2",
-    "react-native-flash-message": "0.1.17",
+    "react-native-actionsheet": "^2.4.2",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-modal-datetime-picker": "^10.2.0",
     "react-native-modals": "^0.22.3",
     "react-native-reanimated": "^2.2.0",
     "react-native-safe-area-context": "^3.2.0",
-    "react-native-screens": "^3.5.0"
+    "react-native-screens": "^3.5.0",
+    "react-native-toast-notifications": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",

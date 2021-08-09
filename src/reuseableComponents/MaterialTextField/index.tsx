@@ -7,15 +7,20 @@
 //
 import React, {Component} from 'react';
 import {
+  View,
   Text,
   StyleSheet,
   TextInput,
   Animated,
+  Image,
   TouchableOpacity,
 } from 'react-native';
+import moment from 'moment';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 type PropsType = {
   label?: string;
+  type?: string;
   error?: string;
   onRightPress?: () => void;
   rightIcon?: any;
@@ -41,12 +46,14 @@ type StateType = {
   maxHeight?: number;
   minHeight?: number;
   expanded?: boolean;
+  isDatePickerVisible?: boolean;
 };
 
 export default class MaterialTextField extends Component<PropsType, StateType> {
   static defaultProps = {
     label: 'placeholder',
     error: 'Error',
+    type: 'text',
     onRightPress: () => {},
     rightIcon: null,
     rightText: '',
@@ -72,6 +79,7 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
       maxHeight: 0,
       minHeight: 52,
       expanded: false,
+      isDatePickerVisible: false,
     };
   }
   _animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1);
@@ -174,6 +182,25 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
 
   clearValue = () => this.setState({val: ''});
 
+  showDatePicker = () => {
+    this.setState({
+      isDatePickerVisible: true,
+    });
+  };
+
+  hideDatePicker = () => {
+    this.setState({
+      isDatePickerVisible: false,
+    });
+  };
+
+  handleConfirm = date => {
+    this.setState({
+      val: moment(date).format('ddd, MMM DD, YYYY'),
+    });
+    this.hideDatePicker();
+  };
+
   componentIcon = () => {
     if (this.props.rightIcon || this.state.expanded) {
       return (
@@ -203,6 +230,12 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
     return (
       <Animated.View
         style={[{height: this.animation, marginTop: 12}, this.props.style]}>
+        <DateTimePickerModal
+          isVisible={this.state.isDatePickerVisible}
+          mode="date"
+          onConfirm={this.handleConfirm}
+          onCancel={this.hideDatePicker}
+        />
         <Animated.View
           style={[this.borderColorStyle, styles.borderStyle, this.borderStyle]}>
           <Animated.Text
@@ -210,6 +243,18 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
             numberOfLines={1}>
             {this.props.label}
           </Animated.Text>
+          {this.props.type === 'date' ? (
+            <View style={styles.dateWrapper}>
+              <Text style={styles.txtInputStyle}>{this.state.val}</Text>
+              <TouchableOpacity
+                onPress={this.showDatePicker}
+                style={{paddingHorizontal: 16 / 2}}>
+                <Image source={require('./calendar.png')} />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <></>
+          )}
           <TextInput
             ref={ref => (this.textInput = ref)}
             style={[
@@ -275,5 +320,12 @@ const styles = StyleSheet.create({
   borderStyle: {
     borderRadius: 4,
     flexDirection: 'row',
+  },
+  dateWrapper: {
+    flex: 1,
+    marginLeft: 5,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

@@ -33,6 +33,7 @@ const DialogModal: React.FC<ModalProps> = props => {
     isVisible,
     overlayBackgroundColor,
   } = props;
+
   return (
     <Modal
       visible={isVisible}
