@@ -1,9 +1,7 @@
 //
-//  index.js:
+//  index.tsx:
 //  BoilerPlate
-//
-//  Created by Retrocube on 10/4/2019, 9:27:23 AM.
-//  Copyright © 2019 Retrocube. All rights reserved.
+//  Created by Zia-Qureshi on 10/7/2021.
 //
 import React, {Component} from 'react';
 import {
@@ -12,10 +10,10 @@ import {
   StyleSheet,
   TextInput,
   Animated,
-  Image,
   TouchableOpacity,
 } from 'react-native';
 import moment from 'moment';
+import ModalPicker from '../ModalPicker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 type PropsType = {
@@ -37,9 +35,18 @@ type PropsType = {
   onFocus?: () => void;
   returnKeyType?: any;
   onSubmitEditing?: () => void;
+  multiline?: boolean;
+  maxLength?: number;
+  editable?: boolean;
+  secureTextEntry?: boolean;
+  selectionColor?: string;
+  keyboardType?: any;
+  selected?: any;
+  options?: object;
 };
 
 type StateType = {
+  id: boolean;
   isFocused: boolean;
   error?: string;
   val?: string | number;
@@ -75,7 +82,7 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
     this.state = {
       isFocused: false,
       error: '',
-      val: props.value ? props.value : '',
+      val: props.value ? props.value : this.props.selected,
       maxHeight: 0,
       minHeight: 52,
       expanded: false,
@@ -94,6 +101,10 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
   handleFocus = () => {
     this.animate(1);
     this.props.onFocus();
+  };
+  cBdata = (data: any) => {
+    // console.warn('CBdata ', data);
+    this.setState({id: data?.id});
   };
   handleBlur = () => this.animate(this.state.val ? 1 : 0);
   animate = toValue => {
@@ -178,11 +189,19 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
     this.setState({val: value});
   };
 
-  getValue = () => this.state.val;
+  getValue = () => {
+    if (this.state?.id != null) {
+      // console.warn(this.state?.id);
+      return this.state?.id;
+    } else {
+      return this.state.val;
+    }
+  };
 
   clearValue = () => this.setState({val: ''});
 
   showDatePicker = () => {
+    this.handleFocus();
     this.setState({
       isDatePickerVisible: true,
     });
@@ -200,6 +219,7 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
     });
     this.hideDatePicker();
   };
+  setFocus = () => this.textInput?.focus();
 
   componentIcon = () => {
     if (this.props.rightIcon || this.state.expanded) {
@@ -217,7 +237,6 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
     } else {
       return (
         <Animated.Text style={this.colorStyle}>
-          {' '}
           {this.props.rightText}
         </Animated.Text>
       );
@@ -226,6 +245,7 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
   focus = () => {
     this.textInput.focus();
   };
+
   render() {
     return (
       <Animated.View
@@ -243,18 +263,7 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
             numberOfLines={1}>
             {this.props.label}
           </Animated.Text>
-          {this.props.type === 'date' ? (
-            <View style={styles.dateWrapper}>
-              <Text style={styles.txtInputStyle}>{this.state.val}</Text>
-              <TouchableOpacity
-                onPress={this.showDatePicker}
-                style={{paddingHorizontal: 16 / 2}}>
-                <Image source={require('./calendar.png')} />
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <></>
-          )}
+
           <TextInput
             ref={ref => (this.textInput = ref)}
             style={[
@@ -269,7 +278,10 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
             value={this.state.val}
             multiline={this.props.multiline && true}
             maxLength={this.props.maxLength}
-            editable={this.props.editable}
+            editable={
+              this.props.editable ||
+              (this.props.type !== 'date' && this.props.type !== 'dropdown')
+            }
             autoCorrect={false}
             keyboardType={this.props.keyboardType}
             secureTextEntry={this.props.secureTextEntry}
@@ -285,6 +297,28 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
               style={styles.iconStyle}>
               {this.componentIcon()}
             </TouchableOpacity>
+          )}
+          {this.props.type === 'date' ? (
+            <TouchableOpacity
+              onPress={this.showDatePicker}
+              style={{alignSelf: 'center'}}>
+              <Animated.Image
+                resizeMode="contain"
+                source={require('./calendar.png')}
+                style={[{width: 28, height: 28, margin: 10}]}
+              />
+            </TouchableOpacity>
+          ) : this.props.type === 'dropdown' ? (
+            <ModalPicker
+              selected={this.props.selected}
+              options={this.props.options}
+              wrapper={styles.dateWrapper}
+              textStyle={{}}
+              value={this.state.val}
+              cBdata={this.cBdata}
+            />
+          ) : (
+            <></>
           )}
         </Animated.View>
         {this.state.error !== '' && (
@@ -303,7 +337,7 @@ const styles = StyleSheet.create({
   txtInputStyle: {
     minHeight: 52,
     height: 52,
-    // fontSize: 20,
+    fontSize: 16,
     color: 'goldenrod',
     paddingLeft: 15,
     paddingTop: 5,

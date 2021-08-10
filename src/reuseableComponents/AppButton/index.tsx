@@ -17,7 +17,7 @@ const AppButton = (props: any) => {
       onPress={props.onPress}>
       <View style={{flex: 1, alignSelf: 'center', justifyContent: 'center'}}>
         <Text
-          style={[styles.txtTitle, {color: props.item.textColor || 'black'}]}>
+          style={[styles.txtTitle, {color: props.item.textColor || '#FFFFFF'}]}>
           {props.item.title}
         </Text>
       </View>
@@ -29,7 +29,7 @@ const AppButton = (props: any) => {
         source={props.backgroundImage}
         style={styles.img}>
         <Text
-          style={[styles.txtTitle, {color: props.item.textColor || 'black'}]}>
+          style={[styles.txtTitle, {color: props.item.textColor || '#FFFFFF'}]}>
           {props.item.title}
         </Text>
       </ImageBackground>

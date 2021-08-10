@@ -1,13 +1,26 @@
 import React, {Component} from 'react';
-import {View, Text, Image} from 'react-native';
-
-import PropTypes from 'prop-types';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {ActionSheetCustom as ActionSheet} from 'react-native-actionsheet';
-import {ButtonView} from '../../reuseableComponents';
-import {Images, Colors} from '../../theme';
 
-class ModalPicker extends Component {
-  constructor(props) {
+interface PropsType {
+  value: string;
+  options: [any];
+  selected: number | string;
+  cBdata: any;
+  error: any;
+  style: object;
+  wrapper: object;
+  textStyle: object;
+}
+
+type StateType = {
+  id: number;
+  value: string;
+  options: any;
+};
+
+class ModalPicker extends Component<PropsType, StateType> {
+  constructor(props: any) {
     super(props);
     this.state = {
       value: props.selected
@@ -16,9 +29,6 @@ class ModalPicker extends Component {
       options: props.options,
     };
   }
-  static propTypes = {
-    value: PropTypes.string,
-  };
 
   componentDidUpdate(prevProps) {
     // console.log(prevProps.value, this.props.value);
@@ -66,7 +76,7 @@ class ModalPicker extends Component {
 
   pickActionSheetRef = ref => (this.pickActionSheet = ref);
 
-  _renderText = (text, checked) => (
+  _renderText = (text: string, checked: boolean) => (
     <View
       style={{
         flexDirection: 'row',
@@ -75,22 +85,24 @@ class ModalPicker extends Component {
       }}>
       {checked ? (
         <Image
-          source={Images.icClose}
-          style={{position: 'absolute', left: -40, top: -8}}
+          source={require('./checked.png')}
+          style={{position: 'absolute', left: -52, top: 0}}
         />
       ) : null}
-      <Text style={{color: Colors.text.black}}>{text}</Text>
+      <Text style={{color: '#000'}}>{text}</Text>
     </View>
   );
 
   render() {
-    let {options, value, textStyle} = this.state;
-    console.log({value});
-    const {isActiveEvent, wrapper} = this.props;
+    let {value} = this.state;
+
+    const {wrapper, textStyle} = this.props;
     return (
-      <ButtonView onPress={this.onPress} style={[this.props.style, {flex: 1}]}>
+      <TouchableOpacity
+        onPress={this.onPress}
+        style={[this.props.style, {flex: 1}]}>
         <View style={wrapper}>
-          <Text style={[textStyle, {color: Colors.text.brownGreyTwo}]}>
+          <Text style={[textStyle, {fontSize: 16, color: 'goldenrod'}]}>
             {value}
           </Text>
           {/* <Image source={Images.icExpandMore} /> */}
@@ -106,14 +118,14 @@ class ModalPicker extends Component {
                     const val = `${item.title}`;
                     return this._renderText(val, val === value);
                   }),
-                  this._renderText('Discard'),
+                  this._renderText('Discard', false),
                 ]
               : ['No Data Found']
           }
           cancelButtonIndex={this.state.options.length}
           onPress={this.handleActionSheetPress}
         />
-      </ButtonView>
+      </TouchableOpacity>
     );
   }
 }
